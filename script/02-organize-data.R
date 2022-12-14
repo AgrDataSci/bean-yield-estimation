@@ -5,10 +5,6 @@
 library("ClimMobTools")
 library("gosset")
 library("janitor")
-library("magrittr")
-library("tidyverse")
-library("raster")
-library("sf")
 # additional functions from ClimMob-analysis 
 source("https://raw.githubusercontent.com/AgrDataSci/ClimMob-analysis/master/modules/01_functions.R")
 
