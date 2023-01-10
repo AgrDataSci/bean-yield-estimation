@@ -140,6 +140,9 @@ yield2 %>%
   geom_boxplot()
 
 
+cor(x = yield2[yield2$variable == "farmer_volume", "value"],
+    y = yield2[yield2$variable == "tech_volume", "value"], 
+    use = "pairwise.complete.obs")
 
 
 
