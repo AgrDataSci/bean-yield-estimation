@@ -13,7 +13,9 @@ list.files("data", full.names = TRUE)
 load("processing/trial-data.rda")
 
 # check names of sheets
+#install readxl and readxlsb packages
 filename = "data/Yield determination survey.xlsx"
+
 
 
 excel_sheets(filename)
@@ -26,6 +28,8 @@ descrip = read_excel(filename, sheet = 3, na = "NA")
 
 # make clean names
 names(dat) = make_clean_names(names(dat))
+
+#clean_names does not seem to run
 
 names(dat)
 
@@ -48,6 +52,7 @@ uniquenames = lapply(cmdata, function(x){
 
 uniquenames = unique(unlist(uniquenames))
 
+uniquenames
 
 # fix some codes that diverged over time
 cmdata = lapply(cmdata, function(x){
@@ -60,13 +65,14 @@ cmdata = lapply(cmdata, function(x){
   x
 })
 
+cmdata
 # put the data together 
 cmdata = rowbind(cmdata)
 
-cmdata
-
 # create an id combining package id and project code 
 cmdata$block_id = paste(cmdata$package_project_name, cmdata$id, sep = "-")
+
+#Error in cmdata[, union("block_id", names(cmdata))] : incorrect number of dimensions
 
 cmdata = cmdata[, union("block_id", names(cmdata))]
 
@@ -78,12 +84,16 @@ dat$block_id = paste(dat$climmob_code, dat$package_id, sep = "-")
 dat = dat[, union("block_id", names(dat))]
 
 dat
-
 # merge the data to get variable names
- 
+keep = cmdata$block_id %in% dat$block_id
+
+cmdata = cmdata[keep, ]
+
+cmdata
 
 # check the varieties assessed
 pack_index = paste0("package_item_", letters[1:3])
+
 
 sort(table(unlist(cmdata[pack_index])))
 
@@ -144,10 +154,40 @@ yield2 %>%
   facet_grid(~ variable) +
   geom_boxplot()
 
+# make a new dataframe with volumetric yield 
+volume_yield = data.frame(farmer = yield2[yield2$variable == "farmer_volume", "value"],
+                          tech = yield2[yield2$variable == "tech_volume", "value"])
 
-cor(x = yield2[yield2$variable == "farmer_volume", "value"],
-    y = yield2[yield2$variable == "tech_volume", "value"], 
-    use = "pairwise.complete.obs")
+
+# remove 0's and NA's
+volume_yield[volume_yield == 0] = NA
+volume_yield = na.omit(volume_yield)
+
+
+# check the correlation 
+cor(volume_yield[,1],
+    volume_yield[,2])
+
+
+plot(volume_yield[,1],
+     volume_yield[,2],
+     xlab = "Farmer measure", 
+     ylab = "Technician measure")
+
+
+volume_yield$logdiff = log(volume_yield$farmer) - log(volume_yield$tech)
+
+plot(density(volume_yield$logdiff))
+
+
+compare(log(volume_yield$farmer),
+        log(volume_yield$tech),
+        labels = "") +
+  labs(x = "Average Volumetric Yield", 
+       y = "Difference (Farmer - Technician)")
+
+
+
 
 
 

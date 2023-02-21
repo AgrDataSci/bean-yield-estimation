@@ -16,8 +16,16 @@ key <- key[1,]
 
 
 
+key <- read.table("token/api-key.txt", sep = ",")
+key <- data.frame(key = key[,1], server = key[, 2])
+key <- key[1,]
+
+
+
 # get the list of projects from the user indicated in the API key
 projects <- data.frame()
+
+
 
 for(i in seq_along(key$key)) {
   projects <- rbind(projects, 

@@ -15,7 +15,6 @@ load("processing/trial-data.rda")
 # check names of sheets
 filename = "data/Yield determination survey.xlsx"
 
-
 excel_sheets(filename)
 
 # data file
@@ -63,8 +62,6 @@ cmdata = lapply(cmdata, function(x){
 # put the data together 
 cmdata = rowbind(cmdata)
 
-cmdata
-
 # create an id combining package id and project code 
 cmdata$block_id = paste(cmdata$package_project_name, cmdata$id, sep = "-")
 
@@ -77,10 +74,10 @@ dat$block_id = paste(dat$climmob_code, dat$package_id, sep = "-")
 
 dat = dat[, union("block_id", names(dat))]
 
-dat
-
 # merge the data to get variable names
- 
+keep = cmdata$block_id %in% dat$block_id
+
+cmdata = cmdata[keep, ]
 
 # check the varieties assessed
 pack_index = paste0("package_item_", letters[1:3])
@@ -89,14 +86,13 @@ sort(table(unlist(cmdata[pack_index])))
 
 # focus only in the yield data 
 paste(names(dat), collapse = "','")
-sel = c('block_id', 'farmer_volume_var_a','farmer_volume_var_b','farmer_volume_var_c',
-        'tech_volume_var_a','tech_volume_var_b','tech_volume_var_c',
-        'grain_yield_var_a','grain_yield_var_b','grain_yield_var_c')
+sel = c('block_id', 'farmer_volume_var_a','farmer_volume_var_b',
+        'farmer_volume_var_c','tech_volume_var_a','tech_volume_var_b',
+        'tech_volume_var_c','grain_yield_var_a','grain_yield_var_b',
+        'grain_yield_var_c')
 
 
 yield = dat[, sel]
-
-yield
 
 # merge
 yield = merge(cmdata[, c("block_id", pack_index)], yield, by = "block_id")
@@ -123,8 +119,9 @@ for (i in seq_along(variables)) {
   val_i = data.frame(block_id = rep(yield$block_id, 3),
                      plot =  rep(letters[1:3], each = nrow(yield)),
                      variable = variables[i],
-                     value = as.numeric(unlist(yield[paste0(variables[i], 
-                                                            "_item_", letters[1:3])])))
+                     value = as.numeric(unlist(yield[paste0(variables[i],
+                                                            "_item_",
+                                                            letters[1:3])])))
   
   val_i$id = paste(val_i$block_id, val_i$plot, sep = "-")
   
@@ -144,15 +141,47 @@ yield2 %>%
   facet_grid(~ variable) +
   geom_boxplot()
 
+# Scatter Plot
+plot(yield2[yield2$variable == "farmer_volume", "value"],
+     yield2[yield2$variable == "tech_volume", "value"],
+     main="Tech volume Vs Farmer volume Scatter plot",
+     xlab="Farmer volume", 
+     ylab="Tech volume",
+     pch=20)
+# Add fit lines
+abline(lm(yield2[yield2$variable == "tech_volume", "value"]~yield2[yield2$variable == "farmer_volume", "value"]),
+       col="red") # regression line (y~x)
+
 
 cor(x = yield2[yield2$variable == "farmer_volume", "value"],
     y = yield2[yield2$variable == "tech_volume", "value"], 
     use = "pairwise.complete.obs")
 
 
+# Paired Samples Wilcoxon Test
+rank_test = wilcox.test(yield2[yield2$variable == "farmer_volume", "value"],
+                       yield2[yield2$variable == "tech_volume", "value"],
+                       paired = TRUE)
+
+# Printing the results
+print(rank_test)
+
+# Analyzing the output.
+# Following the null and alternative hypotheses:
+##  H0: Farmer estimates and field agent estimates are equal
+##  HA: Farmer estimates and field agent estimates are not equal
+
+# We reject the null hypothesis since the P-value is less than 0.01. We have
+##enough evidence to claim that Farmer estimates and field agent estimates are 
+##not equal.
 
 
-
+# 
+# Wilcoxon signed rank test with continuity correction
+# 
+# data:  yield2[yield2$variable == "farmer_volume", "value"] and yield2[yield2$variable == "tech_volume", "value"]
+# V = 309, p-value = 1.378e-09
+# alternative hypothesis: true location shift is not equal to 0
 
 
 
