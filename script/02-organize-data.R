@@ -140,13 +140,22 @@ yield2 %>%
   geom_boxplot()
 
 
-cor(x = yield2[yield2$variable == "farmer_volume", "value"],
-    y = yield2[yield2$variable == "tech_volume", "value"], 
-    use = "pairwise.complete.obs")
+cor
 
+xx <- na.omit(data.frame(farmer = yield2[yield2$variable == "farmer_volume", "value"],
+                         technician = yield2[yield2$variable == "tech_volume", "value"]))
 
+plot(xx[,1], xx[,2], 
+     xlab = "Yield (farmer)",
+     ylab = "Yield (technician)")
+lines(1, 1)
 
+coef(lm(farmer ~ technician, data = xx))
 
+ggplot(xx, aes(y = technician,
+               x = farmer)) +
+  geom_jitter() +
+  geom_abline(slope = 0.86)
 
 
 
