@@ -148,6 +148,7 @@ plot(yield2[yield2$variable == "farmer_volume", "value"],
      xlab="Farmer volume", 
      ylab="Tech volume",
      pch=20)
+
 # Add fit lines
 abline(lm(yield2[yield2$variable == "tech_volume", "value"]~yield2[yield2$variable == "farmer_volume", "value"]),
        col="red") # regression line (y~x)
