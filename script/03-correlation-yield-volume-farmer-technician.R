@@ -76,16 +76,49 @@ for (i in seq_along(pattern)) {
 }
 
 # add to the main data 
-dat = cbind(dat, averages)
+dat = merge(dat, averages, by = "block_id")
 
 # now do the same for the values collected 10 times
+pattern = c("t", "w", "l")
+pattern_name = c("thickness", "width", "length")
 
+averages = data.frame(block_id = dat$block_id)
+
+# run over pattern
+for (i in seq_along(pattern)) {
+  
+  dat_i = data.frame(row.names = 1:nrow(dat))
+  # run over plots a b c
+  for (j in 1:3) {
+    
+    x = paste0(pattern[i], letters[j], c(1:10))
+    
+    x = rowMeans(dat[x])
+    
+    dat_i = cbind(dat_i, x = x)
+    
+  }
+  
+  names(dat_i) = paste0(pattern_name[i], paste0("_var_", letters[1:3]))
+  
+  averages = cbind(averages, dat_i)
+  
+}
+
+# add to the main data 
+dat = merge(dat, averages, by = "block_id")
 
 # ..............................
+paste(names(dat), collapse = "', '")
+
 sel = c('block_id',
         'farmer_volume_var_a','farmer_volume_var_b','farmer_volume_var_c',
         'tech_volume_var_a','tech_volume_var_b','tech_volume_var_c',
-        'grain_yield_var_a','grain_yield_var_b','grain_yield_var_c')
+        'grain_yield_var_a','grain_yield_var_b','grain_yield_var_c',
+        'moisture_content_var_a', 'moisture_content_var_b', 'moisture_content_var_c',
+        'hundred_seed_weight_var_a', 'hundred_seed_weight_var_b', 'hundred_seed_weight_var_c',
+        'thickness_var_a', 'thickness_var_b', 'thickness_var_c', 'width_var_a', 'width_var_b', 
+        'width_var_c', 'length_var_a', 'length_var_b', 'length_var_c')
 
 
 yield = dat[, sel]
@@ -105,9 +138,12 @@ names(yield)
 yield = transpose(data = yield, 
                   id = "block_id", 
                   blocks = pack_index,
-                  variables = c("farmer_volume", "tech_volume", "grain_yield"), 
+                  variables = c("farmer_volume", "tech_volume", "grain_yield",
+                                "moisture_content", "hundred_seed_weight",
+                                "thickness", "width", "length"), 
                   variables_block = paste0("_item_", letters[1:3]))
 
+yield
 
 # Scatter Plot
 plot(yield$farmer_volume,
