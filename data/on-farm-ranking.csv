@@ -1,0 +1,181 @@
+"block_id","plot","tech","trait","rank"
+"bea22kilin-1","a","RWR 2154","Yield",1
+"bea22kilin-1","b","COD MLB 0033","Yield",3
+"bea22kilin-1","c","Kablanketi","Yield",2
+"bea22kilin-11","a","Boroto","Yield",1
+"bea22kilin-11","b","Uyole 18","Yield",3
+"bea22kilin-11","c","SCR 61","Yield",2
+"bea22kilin-17","a","Calima Uyole (Check)","Yield",2
+"bea22kilin-17","b","Boroto","Yield",1
+"bea22kilin-17","c","Uyole03  (Check)","Yield",3
+"bea22kilin-21","a","Uyole03  (Check)","Yield",2
+"bea22kilin-21","b","Calima Uyole (Check)","Yield",1
+"bea22kilin-21","c","Kablanketi","Yield",3
+"bea22kilin-22","a","RCB 593","Yield",1
+"bea22kilin-22","b","Uyole 18","Yield",2
+"bea22kilin-22","c","VTT923/23-10 (Uyole)","Yield",3
+"bea22kilin-23","a","VTT923/23-10 (Uyole)","Yield",3
+"bea22kilin-23","b","Boroto","Yield",2
+"bea22kilin-23","c","COD MLB 0033","Yield",1
+"bea22kilin-24","a","RWR 2154","Yield",2
+"bea22kilin-24","b","RCB 593","Yield",3
+"bea22kilin-24","c","Calima Uyole (Check)","Yield",1
+"bea22kilin-3","a","Calima Uyole (Check)","Yield",2
+"bea22kilin-3","b","SCR 61","Yield",3
+"bea22kilin-3","c","Uyole 18","Yield",1
+"bea22kilin-31","a","KAB 36","Yield",3
+"bea22kilin-31","b","RCB 593","Yield",2
+"bea22kilin-31","c","Boroto","Yield",1
+"bea22kilin-33","a","RCB 593","Yield",1
+"bea22kilin-33","b","Sweet violet","Yield",2
+"bea22kilin-33","c","Calima Uyole (Check)","Yield",3
+"bea22kilin-34","a","Uyole 18","Yield",2
+"bea22kilin-34","b","COD MLB 0033","Yield",3
+"bea22kilin-34","c","Uyole03  (Check)","Yield",1
+"bea22kilin-36","a","VTT923/23-10 (Uyole)","Yield",3
+"bea22kilin-36","b","Uyole03  (Check)","Yield",2
+"bea22kilin-36","c","Sweet violet","Yield",1
+"bea22kilin-38","a","SCR 61","Yield",3
+"bea22kilin-38","b","Calima Uyole (Check)","Yield",2
+"bea22kilin-38","c","Boroto","Yield",1
+"bea22kilin-4","a","VTT923/23-10 (Uyole)","Yield",3
+"bea22kilin-4","b","RCB 593","Yield",2
+"bea22kilin-4","c","Uyole03  (Check)","Yield",1
+"bea22kilin-42","a","KAB 36","Yield",1
+"bea22kilin-42","b","Kipapi","Yield",3
+"bea22kilin-42","c","VTT923/23-10 (Uyole)","Yield",2
+"bea22kilin-44","a","Sweet violet","Yield",3
+"bea22kilin-44","b","Uyole 18","Yield",1
+"bea22kilin-44","c","SCR 61","Yield",2
+"bea22kilin-47","a","Boroto","Yield",3
+"bea22kilin-47","b","Kipapi","Yield",2
+"bea22kilin-47","c","Uyole03  (Check)","Yield",1
+"bea22kilin-48","a","Uyole 18","Yield",2
+"bea22kilin-48","b","RWR 2154","Yield",3
+"bea22kilin-48","c","Kablanketi","Yield",1
+"bea22kilin-5","a","RCB 593","Yield",3
+"bea22kilin-5","b","VTT923/23-10 (Uyole)","Yield",1
+"bea22kilin-5","c","Boroto","Yield",2
+"bea22kilin-6","a","Uyole03  (Check)","Yield",3
+"bea22kilin-6","b","Boroto","Yield",1
+"bea22kilin-6","c","KAB 36","Yield",2
+"bea22kilin-7","a","Uyole 18","Yield",3
+"bea22kilin-7","b","Kipapi","Yield",2
+"bea22kilin-7","c","Calima Uyole (Check)","Yield",1
+"bea22kilin-8","a","KAB 36","Yield",1
+"bea22kilin-8","b","Uyole03  (Check)","Yield",3
+"bea22kilin-8","c","Sweet violet","Yield",2
+"bea22kilin-9","a","Kablanketi","Yield",2
+"bea22kilin-9","b","RWR 2154","Yield",1
+"bea22kilin-9","c","RCB 593","Yield",3
+"bean22reco-160","a","Kablanketi","Yield",1
+"bean22reco-160","b","Calima Uyole (Check)","Yield",2
+"bean22reco-160","c","Uyole03  (Check)","Yield",3
+"bean22reco-170","a","VTT923/23-10 (Uyole)","Yield",1
+"bean22reco-170","b","Sweet violet","Yield",3
+"bean22reco-170","c","SCR 61","Yield",2
+"bean22reco-217","a","Boroto","Yield",1
+"bean22reco-217","b","Kipapi","Yield",2
+"bean22reco-217","c","Sweet violet","Yield",3
+"bean22reco-218","a","RWR 2154","Yield",1
+"bean22reco-218","b","Uyole03  (Check)","Yield",2
+"bean22reco-218","c","VTT923/23-10 (Uyole)","Yield",3
+"bean22reco-241","a","RWR 2154","Yield",1
+"bean22reco-241","b","Boroto","Yield",3
+"bean22reco-241","c","Kipapi","Yield",2
+"bean22reco-96","a","Sweet violet","Yield",1
+"bean22reco-96","b","SCR 61","Yield",3
+"bean22reco-96","c","RCB 593","Yield",2
+"bean22reco-99","a","Gloria","Yield",1
+"bean22reco-99","b","Kipapi","Yield",2
+"bean22reco-99","c","NUA 48","Yield",3
+"bea22kilin-1","a","RWR 2154","GrainYield",1
+"bea22kilin-1","b","COD MLB 0033","GrainYield",3
+"bea22kilin-1","c","Kablanketi","GrainYield",2
+"bea22kilin-11","a","Boroto","GrainYield",2
+"bea22kilin-11","b","Uyole 18","GrainYield",3
+"bea22kilin-11","c","SCR 61","GrainYield",1
+"bea22kilin-17","a","Calima Uyole (Check)","GrainYield",2
+"bea22kilin-17","b","Boroto","GrainYield",1
+"bea22kilin-17","c","Uyole03  (Check)","GrainYield",3
+"bea22kilin-21","a","Uyole03  (Check)","GrainYield",2
+"bea22kilin-21","b","Calima Uyole (Check)","GrainYield",1
+"bea22kilin-21","c","Kablanketi","GrainYield",3
+"bea22kilin-22","a","RCB 593","GrainYield",1
+"bea22kilin-22","b","Uyole 18","GrainYield",2
+"bea22kilin-22","c","VTT923/23-10 (Uyole)","GrainYield",3
+"bea22kilin-23","a","VTT923/23-10 (Uyole)","GrainYield",3
+"bea22kilin-23","b","Boroto","GrainYield",2
+"bea22kilin-23","c","COD MLB 0033","GrainYield",1
+"bea22kilin-24","a","RWR 2154","GrainYield",2
+"bea22kilin-24","b","RCB 593","GrainYield",3
+"bea22kilin-24","c","Calima Uyole (Check)","GrainYield",1
+"bea22kilin-3","a","Calima Uyole (Check)","GrainYield",1
+"bea22kilin-3","b","SCR 61","GrainYield",3
+"bea22kilin-3","c","Uyole 18","GrainYield",2
+"bea22kilin-31","a","KAB 36","GrainYield",3
+"bea22kilin-31","b","RCB 593","GrainYield",1
+"bea22kilin-31","c","Boroto","GrainYield",2
+"bea22kilin-33","a","RCB 593","GrainYield",1
+"bea22kilin-33","b","Sweet violet","GrainYield",2
+"bea22kilin-33","c","Calima Uyole (Check)","GrainYield",3
+"bea22kilin-34","a","Uyole 18","GrainYield",2
+"bea22kilin-34","b","COD MLB 0033","GrainYield",3
+"bea22kilin-34","c","Uyole03  (Check)","GrainYield",1
+"bea22kilin-36","a","VTT923/23-10 (Uyole)","GrainYield",2
+"bea22kilin-36","b","Uyole03  (Check)","GrainYield",3
+"bea22kilin-36","c","Sweet violet","GrainYield",1
+"bea22kilin-38","a","SCR 61","GrainYield",3
+"bea22kilin-38","b","Calima Uyole (Check)","GrainYield",2
+"bea22kilin-38","c","Boroto","GrainYield",1
+"bea22kilin-4","a","VTT923/23-10 (Uyole)","GrainYield",3
+"bea22kilin-4","b","RCB 593","GrainYield",2
+"bea22kilin-4","c","Uyole03  (Check)","GrainYield",1
+"bea22kilin-42","a","KAB 36","GrainYield",1
+"bea22kilin-42","b","Kipapi","GrainYield",3
+"bea22kilin-42","c","VTT923/23-10 (Uyole)","GrainYield",2
+"bea22kilin-44","a","Sweet violet","GrainYield",2
+"bea22kilin-44","b","Uyole 18","GrainYield",1
+"bea22kilin-44","c","SCR 61","GrainYield",2
+"bea22kilin-47","a","Boroto","GrainYield",2
+"bea22kilin-47","b","Kipapi","GrainYield",3
+"bea22kilin-47","c","Uyole03  (Check)","GrainYield",1
+"bea22kilin-48","a","Uyole 18","GrainYield",3
+"bea22kilin-48","b","RWR 2154","GrainYield",2
+"bea22kilin-48","c","Kablanketi","GrainYield",1
+"bea22kilin-5","a","RCB 593","GrainYield",3
+"bea22kilin-5","b","VTT923/23-10 (Uyole)","GrainYield",2
+"bea22kilin-5","c","Boroto","GrainYield",1
+"bea22kilin-6","a","Uyole03  (Check)","GrainYield",3
+"bea22kilin-6","b","Boroto","GrainYield",2
+"bea22kilin-6","c","KAB 36","GrainYield",1
+"bea22kilin-7","a","Uyole 18","GrainYield",3
+"bea22kilin-7","b","Kipapi","GrainYield",2
+"bea22kilin-7","c","Calima Uyole (Check)","GrainYield",1
+"bea22kilin-8","a","KAB 36","GrainYield",1
+"bea22kilin-8","b","Uyole03  (Check)","GrainYield",3
+"bea22kilin-8","c","Sweet violet","GrainYield",2
+"bea22kilin-9","a","Kablanketi","GrainYield",2
+"bea22kilin-9","b","RWR 2154","GrainYield",1
+"bea22kilin-9","c","RCB 593","GrainYield",3
+"bean22reco-160","a","Kablanketi","GrainYield",1
+"bean22reco-160","b","Calima Uyole (Check)","GrainYield",2
+"bean22reco-160","c","Uyole03  (Check)","GrainYield",3
+"bean22reco-170","a","VTT923/23-10 (Uyole)","GrainYield",1
+"bean22reco-170","b","Sweet violet","GrainYield",2
+"bean22reco-170","c","SCR 61","GrainYield",3
+"bean22reco-217","a","Boroto","GrainYield",2
+"bean22reco-217","b","Kipapi","GrainYield",3
+"bean22reco-217","c","Sweet violet","GrainYield",1
+"bean22reco-218","a","RWR 2154","GrainYield",1
+"bean22reco-218","b","Uyole03  (Check)","GrainYield",3
+"bean22reco-218","c","VTT923/23-10 (Uyole)","GrainYield",2
+"bean22reco-241","a","RWR 2154","GrainYield",1
+"bean22reco-241","b","Boroto","GrainYield",2
+"bean22reco-241","c","Kipapi","GrainYield",3
+"bean22reco-96","a","Sweet violet","GrainYield",3
+"bean22reco-96","b","SCR 61","GrainYield",1
+"bean22reco-96","c","RCB 593","GrainYield",2
+"bean22reco-99","a","Gloria","GrainYield",1
+"bean22reco-99","b","Kipapi","GrainYield",2
+"bean22reco-99","c","NUA 48","GrainYield",3

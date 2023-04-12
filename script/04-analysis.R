@@ -1,48 +1,247 @@
-# # Scatter Plot
-# plot(yield$farmer_volume,
-#      yield$tech_volume,
-#      main="Tech volume Vs Farmer volume Scatter plot",
-#      xlab="Farmer volume", 
-#      ylab="Tech volume",
-#      pch=20)
-# # regression line (y~x)
-# abline(lm(farmer_volume ~ tech_volume, data = yield),
-#        col="red") 
-# 
-# 
-# # Paired Samples Wilcoxon Test
-# rank_test = wilcox.test(yield$farmer_volume,
-#                         yield$tech_volume,
-#                         paired = TRUE)
-# rank_test
-# 
-# # Printing the results
-# print(rank_test)
-# 
-# # use Bland and Altman method to compare the measures in yield
-# # by farmers and technicians
-# 
-# compare_dat = data.frame(farmer = yield$farmer_volume,
-#                          technician = yield$tech_volume)
-# 
-# compare_dat[compare_dat == 0] = NA
-# 
-# compare_dat = na.omit(compare_dat)
-# 
-# compare_plot = 
-#   compare(log(compare_dat$farmer),
-#         log(compare_dat$technician),
-#         labels = "") +
-#   geom_jitter() +
-#   labs(x = "Average Volumetric Yield", 
-#        y = "Difference (Farmer - Technician)")
-# 
-# ggsave("output/comparison-farmer-vs-tech-volum-yield.png",
-#        plot = compare_plot,
-#        height = 13,
-#        width = 13,
-#        dpi = 500,
-#        units = "cm")
+# ..................................
+# Data analysis with grain yield from farms
+library("tidyverse")
+library("ggplot2")
+library("gosset")
+library("PlackettLuce")
+library("car")
+
+# read the data
+list.files("data", full.names = TRUE)
+
+dat = read.csv("data/grain-yield-seed-metric-data.csv")
+
+# the first thing is to compare the volume collected by farmers 
+# and technicians, we use the Bland and Altman method 
+
+boxplot(dat$farmer_volume)
+boxplot(dat$tech_volume)
+
+out = boxplot.stats(dat$farmer_volume)$out
+
+out = dat$farmer_volume %in% out
+
+dat[out, ]
+
+# ..................................
+# ..................................
+# Compare tech vs farmer ####
+# Scatter Plot
+plot(dat$farmer_volume,
+     dat$tech_volume,
+     main="Tech volume Vs Farmer volume Scatter plot",
+     xlab="Farmer volume",
+     ylab="Tech volume",
+     pch=20)
+# regression line (y~x)
+abline(lm(farmer_volume ~ tech_volume, data = dat),
+       col="red")
+
+
+# use Bland and Altman method to compare the measures in yield
+# by farmers and technicians
+compare_dat = data.frame(farmer = dat$farmer_volume,
+                         technician = dat$tech_volume)
+
+# as the approach used log() we need to remove the 0s 
+# othewise we get inf values
+compare_dat[compare_dat == 0] = NA
+
+compare_dat = na.omit(compare_dat)
+
+compare_plot =
+  compare(log(compare_dat$farmer),
+        log(compare_dat$technician),
+        labels = "") +
+  geom_jitter() +
+  labs(x = "Average Volumetric Yield",
+       y = "Difference (Farmer - Technician)")
+
+compare_plot
+
+ggsave("output/comparison-farmer-vs-tech-volum-yield.png",
+       plot = compare_plot,
+       height = 13,
+       width = 13,
+       dpi = 500,
+       units = "cm")
+
+# ..................................
+# ..................................
+# Effect of seed moisture on seed weight ####
+plot(dat$moisture_content, dat$hundred_seed_weight)
+
+# remove outliers
+boxplot(dat$moisture_content)
+
+out = boxplot.stats(dat$moisture_content)$out
+
+out = dat$moisture_content %in% out
+
+plot(dat[!out, c("moisture_content", "grain_yield")])
+
+mod_dat = dat[!out, c("moisture_content", "tech", "grain_yield")]
+
+mod_dat = na.omit(mod_dat)
+
+head(mod_dat)
+
+sort(table(mod_dat$tech))
+
+# effect of variety on moisture content 
+mod = lm(moisture_content ~ tech, data = mod_dat)
+
+summary(mod)
+
+anova(mod)
+
+mod_dat$preds = predict(mod, newdata = mod_dat)
+
+ggplot(mod_dat, aes(y = tech, x = moisture_content)) +
+  geom_boxplot() +
+  labs(y = "Variety",
+       x = "Moisture content (%)",
+       title = paste0("R^2 = ",
+                      round(pseudoR2(mod)$McFadden, 3))) +
+  theme_classic() 
+
+ggsave("output/moisture-content.png",
+       plot = last_plot(),
+       width = 15,
+       height = 10,
+       units = "cm",
+       dpi = 500)
+
+capture.output(summary(mod),
+               file = "output/mod-moisture-content-by-variety.txt")
+
+
+# effect of variety and moisture content on the seed weight
+mod2 = lm(grain_yield ~ ., data = mod_dat)
+
+summary(mod2)
+
+
+# ..................................
+# ..................................
+# Bean dimensions ####
+# Plot the data as boxplots to find any possible outlier
+bean = dat[,c("width", "thickness",
+              "length", "hundred_seed_weight",
+              "tech", "block_id", "plot")]
+
+boxplot(bean$thickness)
+
+boxplot(bean$width)
+
+boxplot(bean$length)
+
+# we see that we have outliers in width and thickness
+boxplot(bean$width)
+boxplot(bean$thickness)
+boxplot(bean$length)
+boxplot(bean$hundred_seed_weight)
+
+# ......................................
+# Part 2 - remove outliers 
+
+runover = c("width", "thickness",
+            "length", "hundred_seed_weight")
+
+for (i in seq_along(runover)) {
+  # use function boxplot.stats to identify possible 
+  # outliers
+  out = boxplot.stats(bean[, runover[i]])$out
+  
+  rmv = !bean[, runover[i]] %in% out
+  
+  bean = bean[rmv, ]
+  
+}
+
+# check the plots again
+boxplot(bean$width)
+boxplot(bean$thickness)
+boxplot(bean$length)
+boxplot(bean$hundred_seed_weight)
+
+
+bean = 
+  bean %>% 
+  group_by(block_id, plot, tech) %>% 
+  summarise(width = mean(width),
+            thickness = mean(thickness),
+            length = mean(length),
+            hundred_seed_weight = mean(hundred_seed_weight)) %>% 
+  ungroup()
+
+bean$location = ifelse(grepl("kilin", bean$block_id),
+                       "Kilindi",
+                       "Karatu")
+
+# ......................................
+# Part 3 - Fit a simple linear model
+head(bean)
+
+plot(bean$length, 
+     bean$hundred_seed_weight)
+
+# fit a linear model using only length
+mod = lm(hundred_seed_weight ~ length,
+         data = bean)
+
+summary(mod)
+
+plot(bean$length, 
+     bean$hundred_seed_weight, 
+     xlab = "Length (mm)",
+     ylab = "Hundred seed weight (g)")
+abline(mod, col = "red")
+
+# ......................................
+# Part 4 - fit a multiple linear model 
+# a second model with length, width and thickness combined
+plot(bean$width, 
+     bean$hundred_seed_weight)
+
+plot(bean$thickness, 
+     bean$hundred_seed_weight)
+
+mod1 = lm(hundred_seed_weight ~  length + width + thickness + tech + location + tech:location,
+          data = bean)
+
+summary(mod1)
+
+mod2 = lm(hundred_seed_weight ~ length + width + thickness + tech,
+          data = bean)
+
+summary(mod2)
+
+avPlots(mod2)
+
+# ......................................
+# ......................................
+# Part 5 - Use model equation to predict new hundred seed weight ####
+# extract equation
+coefs = coefficients(mod2)
+
+coefs
+
+eq = paste0("HSW = ", 
+            round(coefs[1], 1),
+            " + ",
+            round(coefs[2], 1),
+            "(Length) + ",
+            round(coefs[3], 1),
+            ("(Width) + "),
+            round(coefs[4], 1), 
+            "(Thickness)")
+
+
+eq
+
+
+
 # 
 # 
 # 

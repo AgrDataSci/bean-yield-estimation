@@ -1,0 +1,32 @@
+
+Call:
+lm(formula = moisture_content ~ tech, data = mod_dat)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-3.1944 -1.4259 -0.1333  1.1389  5.1741 
+
+Coefficients:
+                         Estimate Std. Error t value Pr(>|t|)    
+(Intercept)              14.42593    0.36449  39.578   <2e-16 ***
+techCalima Uyole (Check)  0.75324    0.53134   1.418   0.1576    
+techCOD MLB 0033          1.06296    0.72899   1.458   0.1461    
+techGloria               -0.72593    1.15263  -0.630   0.5294    
+techKAB 36                0.05741    0.85481   0.067   0.9465    
+techKablanketi            0.33407    0.60991   0.548   0.5844    
+techKipapi               -0.96481    0.57631  -1.674   0.0954 .  
+techNUA 48                0.80741    1.15263   0.700   0.4843    
+techRCB 593               1.00741    0.53134   1.896   0.0592 .  
+techRWR 2154              1.16852    0.57631   2.028   0.0437 *  
+techSCR 61               -0.33148    0.57631  -0.575   0.5657    
+techSweet violet         -0.30370    0.57631  -0.527   0.5987    
+techUyole 18             -0.26878    0.55106  -0.488   0.6262    
+techUyole03  (Check)      0.34815    0.51547   0.675   0.5001    
+techVTT923/23-10 (Uyole)  1.34226    0.54397   2.468   0.0143 *  
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 1.894 on 238 degrees of freedom
+Multiple R-squared:  0.1192,	Adjusted R-squared:  0.06743 
+F-statistic: 2.302 on 14 and 238 DF,  p-value: 0.0056
+

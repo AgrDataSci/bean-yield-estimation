@@ -5,6 +5,8 @@
 library("readxl")
 library("tidyverse")
 library("gosset")
+library("ClimMobTools")
+library("PlackettLuce")
 library("janitor")
 library("car")
 
@@ -192,6 +194,94 @@ write.csv(result,
           row.names = FALSE)
 
 
+# ............................
+# now work with the ranked yield collected 
+# on the sampled farms
+rank_yield = dat[c("block_id", "vy_pr", "vy_nr", "hy_pr", "hy_nr")]
+
+rank_yield = as.data.frame(rank_yield)
+
+rank_yield[rank_yield == 1] = "A"
+rank_yield[rank_yield == 2] = "B"
+rank_yield[rank_yield == 3] = "C"
+
+keep = cmdata$block_id %in% result$block_id
+
+pack = cmdata[keep, 1:5]
+
+head(pack)
+
+rank_yield = merge(pack, rank_yield, by = "block_id")
+
+traits = getTraitList(rank_yield, c("pr", "nr"), c("Yield", "GrainYield"))
+
+R = lapply(traits, function(x){
+  rank_tricot(rank_yield,
+              pack_index, 
+              x$string)
+})
+
+rank_data = data.frame()
+
+for (i in seq_along(traits)) {
+  
+  r = unclass(R[[i]])
+  
+  for (j in seq_along(rank_yield$block_id)) {
+    
+    id = rank_yield$block_id[j]
+    
+    plots = as.vector(unlist(rank_yield[rank_yield$block_id == id, pack_index]))
+    
+    x = r[j, plots]
+    
+    d = data.frame(block_id = id, 
+                   plot = letters[1:3],
+                   tech = plots,
+                   trait = as.vector(traits[[i]]$trait_label),
+                   rank = x)
+    
+    rank_data = rbind(rank_data, d)
+    
+  }
+  
+}
+
+
+mod = lapply(R, function(x){
+  PlackettLuce(x[-16, ])
+})
+
+
+compare(mod[[1]], mod[[2]])
+
+write.csv(rank_data, "data/on-farm-ranking.csv", row.names = FALSE)
+
+
+# now work with the yield data from ClimMob 
+R = rank_tricot(cmdata,
+                pack_index,
+                c("post_harvest_yield_pos","post_harvest_yield_neg"),
+                validate.rankings = TRUE)
+sum(!is.na(R))
+
+# get the gps data
+index = grep("block_id|vegetative_geotrial_lat|vegetative_geotrial_lon|pointofdelivery_lat|pointofdelivery_lon", names(cmdata))
+
+lonlat = cmdata[keep, index]
+
+lonlat$vegetative_geotrial_longitude = ifelse(is.na(lonlat$vegetative_geotrial_longitude),
+                                              lonlat$registration_pointofdelivery_longitude, 
+                                              lonlat$vegetative_geotrial_longitude)
+
+lonlat$vegetative_geotrial_latitude = ifelse(is.na(lonlat$vegetative_geotrial_latitude),
+                                              lonlat$registration_pointofdelivery_latitude, 
+                                              lonlat$vegetative_geotrial_latitude)
+
+
+lonlat = lonlat[,c("block_id","vegetative_geotrial_longitude","vegetative_geotrial_latitude")]
+
+write.csv(lonlat, "data/sampled-plots-coordinates.csv", row.names = FALSE)
 
 
 
