@@ -189,9 +189,9 @@ for(i in seq_along(fill_NAs)) {
   }
 }
 
-write.csv(result,
-          "data/grain-yield-seed-metric-data.csv", 
-          row.names = FALSE)
+# write.csv(result,
+#           "data/grain-yield-seed-metric-data.csv", 
+#           row.names = FALSE)
 
 
 # ............................
@@ -255,7 +255,9 @@ mod = lapply(R, function(x){
 
 compare(mod[[1]], mod[[2]])
 
-write.csv(rank_data, "data/on-farm-ranking.csv", row.names = FALSE)
+write.csv(rank_data,
+          "data/on-farm-ranking.csv",
+          row.names = FALSE)
 
 
 # now work with the yield data from ClimMob 
