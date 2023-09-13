@@ -1,0 +1,22 @@
+
+Call:
+lm(formula = grain_yield ~ farmer_volume + market_class, data = dat)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-1.53676 -0.06898 -0.00172  0.11420  0.36283 
+
+Coefficients:
+                        Estimate Std. Error t value Pr(>|t|)    
+(Intercept)              0.05052    0.04424   1.142   0.2545    
+farmer_volume            0.83276    0.01580  52.691   <2e-16 ***
+market_classred          0.03576    0.05490   0.651   0.5154    
+market_classred mottled -0.08748    0.05251  -1.666   0.0969 .  
+market_classsugar        0.04570    0.04563   1.001   0.3176    
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.236 on 265 degrees of freedom
+Multiple R-squared:  0.9139,	Adjusted R-squared:  0.9126 
+F-statistic: 702.8 on 4 and 265 DF,  p-value: < 2.2e-16
+

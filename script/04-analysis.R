@@ -11,9 +11,16 @@ list.files("data", full.names = TRUE)
 
 dat = read.csv("data/grain-yield-seed-metric-data.csv")
 
+market = read.csv("data/market-classes-2022.csv")
+
+dat = merge(dat, market[c("tech", "market_class")], by = "tech", all.x = TRUE)
+
+sort(unique(dat$tech))
+
+unique(dat$tech) %in% unique(market$tech)
+
 # the first thing is to compare the volume collected by farmers 
 # and technicians, we use the Bland and Altman method 
-
 boxplot(dat$farmer_volume)
 boxplot(dat$tech_volume)
 
@@ -23,13 +30,16 @@ out = dat$farmer_volume %in% out
 
 dat[out, ]
 
+
+cor(dat$farmer_volume, dat$tech_volume)
+
 # ..................................
 # ..................................
 # Compare tech vs farmer ####
 # Scatter Plot
-plot(dat$farmer_volume,
-     dat$tech_volume,
-     main="Tech volume Vs Farmer volume Scatter plot",
+plot(y = dat$farmer_volume,
+     x = dat$tech_volume,
+     main="Tech volume Vs Farmer volume",
      xlab="Farmer volume",
      ylab="Tech volume",
      pch=20)
@@ -59,7 +69,7 @@ compare_plot =
 
 compare_plot
 
-ggsave("output/comparison-farmer-vs-tech-volum-yield.png",
+ ggsave("output/comparison-farmer-vs-tech-volum-yield.png",
        plot = compare_plot,
        height = 13,
        width = 13,
@@ -105,7 +115,7 @@ ggplot(mod_dat, aes(y = tech, x = moisture_content)) +
                       round(pseudoR2(mod)$McFadden, 3))) +
   theme_classic() 
 
-ggsave("output/moisture-content.png",
+ggsave("output/moisture-content.pdf",
        plot = last_plot(),
        width = 15,
        height = 10,
@@ -128,7 +138,7 @@ summary(mod2)
 # Plot the data as boxplots to find any possible outlier
 bean = dat[,c("width", "thickness",
               "length", "hundred_seed_weight",
-              "tech", "block_id", "plot")]
+              "tech", "block_id", "plot", "market_class")]
 
 boxplot(bean$thickness)
 
@@ -144,7 +154,6 @@ boxplot(bean$hundred_seed_weight)
 
 # ......................................
 # Part 2 - remove outliers 
-
 runover = c("width", "thickness",
             "length", "hundred_seed_weight")
 
@@ -164,7 +173,6 @@ boxplot(bean$width)
 boxplot(bean$thickness)
 boxplot(bean$length)
 boxplot(bean$hundred_seed_weight)
-
 
 bean = 
   bean %>% 
@@ -201,44 +209,86 @@ abline(mod, col = "red")
 # ......................................
 # Part 4 - fit a multiple linear model 
 # a second model with length, width and thickness combined
-plot(bean$width, 
-     bean$hundred_seed_weight)
+# plot(bean$width, 
+#      bean$hundred_seed_weight)
+# 
+# plot(bean$thickness, 
+#      bean$hundred_seed_weight)
+# 
+# mod1 = lm(hundred_seed_weight ~  length + width + thickness + tech + location + tech:location,
+#           data = bean)
+# 
+# summary(mod1)
+# 
+# mod2 = lm(hundred_seed_weight ~ length + width + thickness + tech,
+#           data = bean)
+# 
+# summary(mod2)
+# 
+# avPlots(mod2)
 
-plot(bean$thickness, 
-     bean$hundred_seed_weight)
-
-mod1 = lm(hundred_seed_weight ~  length + width + thickness + tech + location + tech:location,
-          data = bean)
-
-summary(mod1)
-
-mod2 = lm(hundred_seed_weight ~ length + width + thickness + tech,
-          data = bean)
-
-summary(mod2)
-
-avPlots(mod2)
+# # ......................................
+# # ......................................
+# # Part 5 - Use model equation to predict new hundred seed weight ##
+# # extract equation
+# coefs = coefficients(mod2)
+# 
+# coefs
+# 
+# eq = paste0("HSW = ", 
+#             round(coefs[1], 1),
+#             " + ",
+#             round(coefs[2], 1),
+#             "(Length) + ",
+#             round(coefs[3], 1),
+#             ("(Width) + "),
+#             round(coefs[4], 1), 
+#             "(Thickness)")
+# 
+# 
+# eq
 
 # ......................................
 # ......................................
-# Part 5 - Use model equation to predict new hundred seed weight ####
-# extract equation
-coefs = coefficients(mod2)
+# Estimate seed weight ##
 
-coefs
+plot(y = dat$grain_yield, x = dat$farmer_volume)
 
-eq = paste0("HSW = ", 
-            round(coefs[1], 1),
+mod = lm(grain_yield ~ farmer_volume + market_class, data = dat)
+
+summary(mod)
+
+abline(mod, col = "red")
+
+coefs = coefficients(mod)
+
+eq = paste0("Grain weight = ", 
+            round(coefs[1], 3),
             " + ",
-            round(coefs[2], 1),
-            "(Length) + ",
-            round(coefs[3], 1),
-            ("(Width) + "),
-            round(coefs[4], 1), 
-            "(Thickness)")
+            round(coefs[2], 3),
+            " * (FarmerVolume) + ",
+            round(coefs[3], 3),
+            " * (ClassRed) + ",
+            round(coefs[4], 3),
+            " * (ClassRedMottled) + ",
+            round(coefs[5], 3),
+            " * (ClassSugar)")
 
+pdf(file = "output/lm-yield-farmer-volume.pdf",
+    width = 13,
+    height = 8)
+plot(y = dat$grain_yield, 
+     x = dat$farmer_volume,
+     main = eq,
+     ylab = "Grain weight (g)",
+     xlab = "Farmer volume estimation")
+abline(mod, col = "red")
+dev.off()
 
-eq
+summary(mod)
+
+capture.output(summary(mod), 
+               file = "output/model-bean-weigth-farmer.txt")
 
 
 
