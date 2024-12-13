@@ -1,5 +1,8 @@
-# ..................................
+# .........................................
+# .........................................
 # Data analysis with grain yield from farms
+# First run Jan 2023
+# Updated Mar 2024
 library("tidyverse")
 library("ggplot2")
 library("gosset")
@@ -30,7 +33,6 @@ out = dat$farmer_volume %in% out
 
 dat[out, ]
 
-
 cor(dat$farmer_volume, dat$tech_volume)
 
 # ..................................
@@ -54,7 +56,7 @@ compare_dat = data.frame(farmer = dat$farmer_volume,
                          technician = dat$tech_volume)
 
 # as the approach used log() we need to remove the 0s 
-# othewise we get inf values
+# otherwise we get inf values
 compare_dat[compare_dat == 0] = NA
 
 compare_dat = na.omit(compare_dat)
@@ -69,12 +71,13 @@ compare_plot =
 
 compare_plot
 
- ggsave("output/comparison-farmer-vs-tech-volum-yield.png",
+ggsave("output/comparison-farmer-vs-tech-volum-yield.png",
        plot = compare_plot,
        height = 13,
        width = 13,
        dpi = 500,
        units = "cm")
+
 
 # ..................................
 # ..................................
@@ -130,7 +133,6 @@ capture.output(summary(mod),
 mod2 = lm(grain_yield ~ ., data = mod_dat)
 
 summary(mod2)
-
 
 # ..................................
 # ..................................
