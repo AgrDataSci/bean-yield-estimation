@@ -22,7 +22,8 @@ summary(model2)
 blups_grain_yield <- unlist(ranef(model2))
 
 
-plot(blups_dry_yield, blups_grain_yield)
+plot(blups_dry_yield, blups_grain_yield, pch = "+")
+abline(lm(blups_dry_yield ~ blups_grain_yield), col = "red")
 cor(blups_dry_yield, blups_grain_yield)
 cor(blups_dry_yield, blups_grain_yield, method = "spearman")
 # The correlation is high
@@ -49,15 +50,23 @@ moisture_content_values <- as.data.frame(emmeans_model)$emmean
 
 dd2 <- data.frame(moisture_content_values, blups_grain_yield, blups_dry_yield)
 # Create scatter plot
-ggplot(dd2, aes(x = blups_grain_yield, y = blups_dry_yield, size = moisture_content_values)) +
+p = ggplot(dd2, aes(x = blups_grain_yield, y = blups_dry_yield, size = moisture_content_values)) +
   geom_point() +
   labs(
-    title = "Does moisture content bias results?",
+    title = "",
     x = "Grain yield with variable moisture",
     y = "Dry yield",
-    size = "Moisture content"
+    size = "Moisture content (%)"
   ) +
-  theme_minimal()
+  theme_minimal() +
+  theme(text = element_text(size = 12))
+
+ggsave("output/moisture-vs-dry-yield.pdf",
+       plot = p,
+       width = 15,
+       height = 13,
+       units = "cm")
+
 # No trend seems to be present
 
 
