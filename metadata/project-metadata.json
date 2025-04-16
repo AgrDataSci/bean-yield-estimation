@@ -1,7 +1,7 @@
 {
   "titles": [
     {
-      "title": "Template for project-oriented and FAIR data analysis workflows"
+      "title": "Replication code and data for: Accuracy of farmer-generated yield estimations of common bean in decentralised on-farm trials in sub-Saharan Africa"
     }
   ],
   "publisher": "Zenodo",
@@ -12,7 +12,7 @@
   },
   "descriptions": [
     {
-      "description": "This is a generic template to allow scientists in using a well structured data workflow following the project-oriented approach and findable accessible interoperable and reusable (FAIR) principles for data and code publication in science. The project contains a example of data from the CIMMYT market intelligence research (Donovan et al 2025, https://doi.org/10.1017/S001447972500002X) with data description and an example of R script for analysis and documentation. Feel free to delete the example files once the project is adapted for your needs.",
+      "description": "This is a yield determination survey under the projects 1000FARMS and AVISA. The yield determination surveys were carried out in the Northern zone of Tanzania, in Kilindi and Karatu district in 2022. The aim of this study is to evaluate how farmers determine yield in an-farm context  through weighing and visual estimations. The data that was collected has been categorized into five sections, namely, farmer demographics and characterization, acuity and literacy tests, farmer-led yield estimations, researcher-led yield estimations and plot size and plot-related characteristics.",
       "descriptionType": "Abstract"
     }
   ],
@@ -28,13 +28,51 @@
   ],
   "subjects": [
     {
-      "subject": "data-driven research"
+      "subject": "crop yield"
     },
     {
-      "subject": "FAIR principles"
+      "subject": "smallholder farms"
+    },
+    {
+      "subject": "participatory plant breeding"
+    },
+    {
+      "subject": "tricot approach"
     }
   ],
   "creators": [
+    {
+      "name": "Nabateregga, Mabel",
+      "nameType": "Personal",
+      "givenName": "Mabel",
+      "familyName": "Nabateregga",
+      "affiliation": [
+        "University of Inland Norway"
+      ],
+      "nameIdentifiers": [
+        {
+          "nameIdentifier": "https://orcid.org/0000-0002-6731-152X",
+          "nameIdentifierScheme": "ORCID",
+          "schemeUri": "https://orcid.org"
+        }
+      ]
+    },
+    {
+      "name": "Dorado-Betancourt, Hugo",
+      "nameType": "Personal",
+      "givenName": "Hugo",
+      "familyName": "Dorado-Betancourt",
+      "affiliation": [
+        "Wageningen University and Research"
+      ],
+      "nameIdentifiers": [
+        {
+          "nameIdentifier": "https://orcid.org/0000-0002-0103-7505",
+          "nameIdentifierScheme": "ORCID",
+          "schemeUri": "https://orcid.org"
+        }
+      ]
+    },
     {
       "name": "de Sousa, Kauê",
       "nameType": "Personal",
@@ -47,22 +85,6 @@
       "nameIdentifiers": [
         {
           "nameIdentifier": "https://orcid.org/0000-0002-7571-7845",
-          "nameIdentifierScheme": "ORCID",
-          "schemeUri": "https://orcid.org"
-        }
-      ]
-    },
-    {
-      "name": "Laporte, Marie-Angélique",
-      "nameType": "Personal",
-      "givenName": "Marie-Angélique",
-      "familyName": "Laporte",
-      "affiliation": [
-        "Alliance Bioversity International – CIAT"
-      ],
-      "nameIdentifiers": [
-        {
-          "nameIdentifier": "https://orcid.org/0000-0002-8461-9745",
           "nameIdentifierScheme": "ORCID",
           "schemeUri": "https://orcid.org"
         }
@@ -81,16 +103,16 @@
   ],
   "fundingReferences": [
     {
-      "funderName": "Norwegian Agency for Development Cooperation",
-      "funderIdentifier": "https://ror.org/04zbn7k04",
-      "awardTitle": "Biodiversity for Opportunities, Livelihoods and Development (BOLD)",
-      "awardNumber": "CONT-1522"
-    },
-    {
       "funderName": "Gates Foundation",
       "funderIdentifier": "https://ror.org/0456r8d26",
       "awardTitle": "1000FARMS",
       "awardNumber": "INV-031561"
+    },
+    {
+      "funderName": "Gates Foundation",
+      "funderIdentifier": "https://ror.org/0456r8d26",
+      "awardTitle": "AVISA",
+      "awardNumber": "INV-009649"
     }
   ]
 }

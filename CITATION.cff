@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+message: "If you use this dataset or software, please cite it as below."
+title: "Replication code and data for: Accuracy of farmer-generated yield estimations of common bean in decentralised on-farm trials in sub-Saharan Africa"
+version: "v1.0"
+date-released: 2025-04-16
+authors:
+  - family-names: Nabateregga
+    given-names: Mabel
+    orcid: https://orcid.org/0000-0002-6731-152X
+    affiliation: "University of Inland Norway"
+  - family-names: Dorado-Betancourt
+    given-names: Hugo
+    orcid: https://orcid.org/0000-0002-0103-7505
+    affiliation: "Wageningen University and Research"
+  - family-names: de Sousa
+    given-names: Kauê
+    orcid: https://orcid.org/0000-0002-7571-7845
+    affiliation: "Alliance Bioversity International – CIAT; University of Inland Norway"
+repository-code: https://github.com/AgrDataSci/template-repo-data-analysis
+license: CC-BY-4.0
+keywords:
+  - crop yield
+  - smallholder farms
+  - participatory plant breeding
+  - tricot approach
