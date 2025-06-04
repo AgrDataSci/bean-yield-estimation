@@ -58,8 +58,9 @@ p = ggplot(dd2, aes(x = blups_grain_yield, y = blups_dry_yield, size = moisture_
     y = "Dry yield",
     size = "Moisture content (%)"
   ) +
-  theme_minimal() +
-  theme(text = element_text(size = 12))
+  theme_minimal(base_size = 12) 
+
+p
 
 ggsave("output/moisture-vs-dry-yield.pdf",
        plot = p,

@@ -71,7 +71,7 @@ compare_plot =
 
 compare_plot
 
-ggsave("output/comparison-farmer-vs-tech-volum-yield.png",
+ggsave("output/comparison-farmer-vs-tech-volum-yield.pdf",
        plot = compare_plot,
        height = 13,
        width = 13,
@@ -112,11 +112,12 @@ mod_dat$preds = predict(mod, newdata = mod_dat)
 
 ggplot(mod_dat, aes(y = tech, x = moisture_content)) +
   geom_boxplot() +
+  geom_vline(xintercept = 14, col = "red", size = 1, linetype="dashed") +
+  theme_classic(base_size = 12) +
   labs(y = "Variety",
        x = "Moisture content (%)",
        title = paste0("R^2 = ",
-                      round(pseudoR2(mod)$McFadden, 3))) +
-  theme_classic() 
+                      round(pseudoR2(mod)$McFadden, 3)))
 
 ggsave("output/moisture-content.pdf",
        plot = last_plot(),
