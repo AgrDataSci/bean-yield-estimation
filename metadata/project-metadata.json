@@ -74,6 +74,38 @@
       ]
     },
     {
+      "name": "van Etten, Jacob",
+      "nameType": "Personal",
+      "givenName": "Jacob",
+      "familyName": "van Etten",
+      "affiliation": [
+        "University of Inland Norway"
+      ],
+      "nameIdentifiers": [
+        {
+          "nameIdentifier": "https://orcid.org/0000-0001-7554-2558",
+          "nameIdentifierScheme": "ORCID",
+          "schemeUri": "https://orcid.org"
+        }
+      ]
+    },
+    {
+      "name": "van Heerwaarden, Joost",
+      "nameType": "Personal",
+      "givenName": "Joost",
+      "familyName": "van Heerwaarden",
+      "affiliation": [
+        "Wageningen University and Research"
+      ],
+      "nameIdentifiers": [
+        {
+          "nameIdentifier": "https://orcid.org/0000-0002-4959-3914",
+          "nameIdentifierScheme": "ORCID",
+          "schemeUri": "https://orcid.org"
+        }
+      ]
+    },
+    {
       "name": "de Sousa, Kauê",
       "nameType": "Personal",
       "givenName": "Kauê",
